@@ -1,0 +1,5 @@
+#
+# Cookbook Name:: gobgp
+# Recipe:: default
+#
+# Copyright:: 2019, The Authors, All Rights Reserved.
