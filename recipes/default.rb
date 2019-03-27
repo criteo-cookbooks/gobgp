@@ -27,6 +27,8 @@ group node['gobgp']['group']
 
 user user do
   gid group
+  shell '/sbin/nologin'
+  manage_home false  
 end
 
 # Create the configuration file
