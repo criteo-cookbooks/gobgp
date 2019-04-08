@@ -28,7 +28,7 @@ group node['gobgp']['group']
 user user do
   gid group
   shell '/sbin/nologin'
-  manage_home false  
+  manage_home false
 end
 
 # Create the configuration file
@@ -62,4 +62,23 @@ systemd_service 'gobgpd' do
     wanted_by 'multi-user.target'
   end
   action %i[create enable start]
+end
+
+# Bash completion
+package 'bash-completion'
+
+uri_hash = ::Mash.new(
+  "gobgp-completion.bash":         'da5d2e6a39f1e17c81e441b603b31a798edaaa9997015619125f6e2bd904fcd6',
+  "gobgp-dynamic-completion.bash": 'a0c9e451af1b3041ecd202a813691d6ceff99283c12c4203abec6e1bbbb6f07b',
+  "gobgp-static-completion.bash":  '1b963fb0254b68e796324bb6b7798bc9a391276033e07b0c06d10d15385e7028',
+)
+url = "https://raw.githubusercontent.com/osrg/gobgp/v#{node['gobgp']['binary']['version']}/tools/completion/"
+dest = '/etc/bash_completion.d/'
+
+uri_hash.each do |uri, checksum|
+  remote_file uri do
+    source url + uri
+    path dest + uri
+    checksum checksum
+  end
 end
