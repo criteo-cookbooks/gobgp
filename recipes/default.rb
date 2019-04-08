@@ -10,7 +10,7 @@ user = node['gobgp']['user']
 group = node['gobgp']['group']
 config_file = node['gobgp']['config_file']
 binary = ::File.join(node['ark']['prefix_bin'], 'gobgpd')
-cmd = "#{binary} -f #{config_file} -t yaml -p"
+cmd = "#{binary} -f #{config_file} -t yaml -p --sdnotify"
 
 # Install the binaries
 ark 'gobgp' do
@@ -50,7 +50,7 @@ systemd_service 'gobgpd' do
     after         %w[network.target syslog.target]
   end
   service do
-    type                 'simple'
+    type                 'notify'
     user                 user
     group                group
     ambient_capabilities 'CAP_NET_BIND_SERVICE'
