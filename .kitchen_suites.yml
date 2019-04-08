@@ -1,4 +1,9 @@
 - name: default
+  verifier:
+    name: inspec
+    sudo: false
+    inspec_tests:
+      - test/integration/inspec
   run_list:
     - recipe[gobgp::default]
   attributes:

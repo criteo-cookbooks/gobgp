@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'berkshelf'
 gem 'chefspec'
+gem 'inspec'
+gem 'kitchen-inspec'
 gem 'rake'
 gem 'foodcritic'
 gem 'chef'
