@@ -13,7 +13,7 @@
 driver:
   name: ec2
   instance_type: t2.micro
-  associate_public_ip: true
+  associate_public_ip: false
   iam_profile_name: test-kitchen
   region: <%= ENV['AWS_REGION'] || 'us-west-2' %>
   tags:
