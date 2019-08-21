@@ -6,6 +6,7 @@ default['gobgp']['binary']['checksum'] = '912b28827966c175cf0adea1f8085df40a8556
 default['gobgp']['user'] = 'gobgpd'
 default['gobgp']['group'] = 'gobgpd'
 default['gobgp']['config_file'] = '/etc/gobgpd.conf'
+default['gobgp']['environment_file'] = '/etc/sysconfig/gobgpd'
 
 default['gobgp']['config'] = ::Mash.new(
   "global":             {
