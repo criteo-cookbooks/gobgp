@@ -55,8 +55,9 @@ systemd_service 'gobgpd' do
     group                group
     ambient_capabilities 'CAP_NET_BIND_SERVICE'
     exec_start_pre       "#{cmd} -d"
-    exec_start           cmd
+    exec_start           "#{cmd} $OPTIONS"
     exec_reload          '/bin/kill -HUP $MAINPID'
+    environment_file     node['gobgp']['environment_file']
   end
   install do
     wanted_by 'multi-user.target'
