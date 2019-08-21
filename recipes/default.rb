@@ -41,6 +41,15 @@ file config_file do
   verify   "#{binary} -f %<path>s -t yaml -d"
 end
 
+# Create gobgpd sysconfig file
+template node['gobgp']['environment_file'] do
+  source 'gobgpd.sysconfig.erb'
+  variables(
+    options: node['gobgp']['options'],
+  )
+  notifies :restart, 'systemd_service[gobgpd]', :delayed
+end
+
 # Create the systemd service
 systemd_service 'gobgpd' do
   unit do
