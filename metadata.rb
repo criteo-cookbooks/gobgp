@@ -6,7 +6,7 @@ description      'Installs/Configure gobgp'
 long_description 'Installs/Configure gobgp'
 issues_url       'https://github.com/criteo-cookbooks/gobgp/issues'
 source_url       'https://github.com/criteo-cookbooks/gobgp'
-version          '2.2.0'
+version          '2.3.0'
 supports         'centos'
 
 depends          'ark'
