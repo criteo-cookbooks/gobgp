@@ -13,7 +13,7 @@
 driver:
   name: ec2
   instance_type: t2.micro
-  associate_public_ip: false
+  associate_public_ip: true
   iam_profile_name: test-kitchen
   region: <%= ENV['AWS_REGION'] || 'us-west-2' %>
   tags:
@@ -32,6 +32,10 @@ driver:
 
 transport:
   ssh_key: <%= ENV['HOME'] %>/.ssh/id_rsa
+
+provisioner:
+  name: chef_solo
+  require_chef_omnibus: 13.6.4
 
 platforms:
   - name: centos-7
