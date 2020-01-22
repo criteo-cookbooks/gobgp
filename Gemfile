@@ -6,8 +6,9 @@ gem 'inspec'
 gem 'kitchen-inspec'
 gem 'rake'
 gem 'foodcritic'
-gem 'chef'
+gem 'chef', '<= 14.14.35'
 gem 'travis'
+gem 'rubyzip', '= 1.2.1'
 
 gem 'kitchen-transport-speedy'
 group :ec2 do
