@@ -11,6 +11,9 @@ group = node['gobgp']['group']
 config_file = node['gobgp']['config_file']
 binary = ::File.join(node['ark']['prefix_bin'], 'gobgpd')
 cmd = "#{binary} -f #{config_file} -t yaml -p --sdnotify"
+# TODO: This forces go DNS resolution instead of dynamic one, due to libc incompatibility.
+# Remove this once https://github.com/osrg/gobgp/issues/2396 is fixed
+gobgpenv = 'GODEBUG=netdns=go'
 
 # Install the binaries
 ark 'gobgp' do
@@ -38,7 +41,7 @@ file config_file do
   mode     '0644'
   content  node['gobgp']['config'].to_hash.to_yaml
   notifies :reload, 'systemd_service[gobgpd]', :delayed
-  verify   "#{binary} -f %<path>s -t yaml -d"
+  verify   "#{gobgpenv} #{binary} -f %<path>s -t yaml -d"
 end
 
 # Create gobgpd sysconfig file
@@ -66,6 +69,7 @@ systemd_service 'gobgpd' do
     exec_start_pre       "#{cmd} -d"
     exec_start           "#{cmd} $OPTIONS"
     exec_reload          '/bin/kill -HUP $MAINPID'
+    environment          gobgpenv.to_s
     environment_file     node['gobgp']['environment_file']
   end
   install do
