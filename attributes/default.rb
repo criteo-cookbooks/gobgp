@@ -1,7 +1,7 @@
-default['gobgp']['binary']['version'] = '2.12.0'
+default['gobgp']['binary']['version'] = '2.24.0'
 gobgp_version = default['gobgp']['binary']['version']
 default['gobgp']['binary']['url'] = "https://github.com/osrg/gobgp/releases/download/v#{gobgp_version}/gobgp_#{gobgp_version}_linux_amd64.tar.gz"
-default['gobgp']['binary']['checksum'] = 'e4a3744e0ea6dec5e2ee2338bc6f1fc5cfd321605144c83ed2ad2f6734646996'
+default['gobgp']['binary']['checksum'] = '9fcf6ca3963a877d8a9fa66d7dda65a55884ba1eb7ba8426e3282607ead4d4ba'
 
 default['gobgp']['user'] = 'gobgpd'
 default['gobgp']['group'] = 'gobgpd'
