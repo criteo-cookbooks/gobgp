@@ -69,7 +69,7 @@ systemd_service 'gobgpd' do
     exec_start_pre       "#{cmd} -d"
     exec_start           "#{cmd} $OPTIONS"
     exec_reload          '/bin/kill -HUP $MAINPID'
-    environment          gobgpenv.to_s
+    environment          gobgpenv
     environment_file     node['gobgp']['environment_file']
   end
   install do
