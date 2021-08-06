@@ -1,21 +1,22 @@
 source 'https://rubygems.org'
 
 gem 'berkshelf'
-gem 'chefspec'
-gem 'inspec'
-gem 'kitchen-inspec'
-gem 'rake'
-gem 'foodcritic'
-gem 'chef', '<= 14.14.35'
-gem 'travis'
-gem 'rubyzip', '= 1.2.1'
 
-gem 'kitchen-transport-speedy'
-group :ec2 do
-  gem 'test-kitchen'
-  gem 'kitchen-ec2', git: 'https://github.com/criteo-forks/kitchen-ec2.git', branch: 'criteo'
-  gem 'dotenv'
+group :unit_test do
+  gem 'chef', '= 14.7.17'
+  gem 'chefspec', '>= 7.4.0'
+  gem 'fakefs'
+  gem 'webmock'
 end
 
-# Other gems should go after this comment
-gem 'rubocop', '=0.65.0'
+group :integration do
+  gem 'kitchen-dokken', '>= 2.9.0'
+  gem 'kitchen-inspec', '>= 2.0.0'
+  gem 'kitchen-vagrant', '>= 1.6.0'
+  gem 'test-kitchen', '>= 2.5.0'
+end
+
+group :lint do
+  gem 'foodcritic'
+  gem 'rubocop', '= 0.65.0'
+end
