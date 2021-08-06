@@ -9,5 +9,7 @@ source_url       'https://github.com/criteo-cookbooks/gobgp'
 version          '2.4.0'
 supports         'centos'
 
+chef_version     '>= 12.14.34'
+
 depends          'ark'
 depends          'systemd'
