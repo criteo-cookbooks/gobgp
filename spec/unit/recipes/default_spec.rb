@@ -8,11 +8,11 @@
 require 'spec_helper'
 
 describe 'gobgp::default' do
-  context 'When all attributes are default, on centos 7.4.1708' do
+  context 'When all attributes are default, on centos 7.8.2003' do
     let(:chef_run) do
       runner = ChefSpec::SoloRunner.new(
         platform: 'centos',
-        version:  '7.4.1708',
+        version:  '7.8.2003',
       )
       runner.converge(described_recipe)
     end
