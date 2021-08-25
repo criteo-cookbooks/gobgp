@@ -11,12 +11,14 @@ group = node['gobgp']['group']
 config_file = node['gobgp']['config_file']
 binary = ::File.join(node['ark']['prefix_bin'], 'gobgpd')
 cmd = "#{binary} -f #{config_file} -t yaml -p --sdnotify"
+gobgp_version = node['gobgp']['version'] || '2.30.0'
+checksum = node['gobgp']['checksum'] || 'a83e9df4150d78d62d41e6bf218b82d16d0f716843e7e0b70fe443ed3cd991fa'
 
 # Install the binaries
 ark 'gobgp' do
-  url              node['gobgp']['binary']['url']
-  checksum         node['gobgp']['binary']['checksum']
-  version          node['gobgp']['binary']['version']
+  url              "https://github.com/osrg/gobgp/releases/download/v#{gobgp_version}/gobgp_#{gobgp_version}_linux_amd64.tar.gz"
+  checksum         checksum
+  version          gobgp_version
   has_binaries     %w[gobgp gobgpd]
   strip_components 0
   notifies         :restart, 'systemd_service[gobgpd]', :delayed
@@ -78,17 +80,17 @@ end
 package 'bash-completion'
 
 uri_hash = ::Mash.new(
-  "gobgp-completion.bash":         'da5d2e6a39f1e17c81e441b603b31a798edaaa9997015619125f6e2bd904fcd6',
-  "gobgp-dynamic-completion.bash": 'a0c9e451af1b3041ecd202a813691d6ceff99283c12c4203abec6e1bbbb6f07b',
-  "gobgp-static-completion.bash":  '1b963fb0254b68e796324bb6b7798bc9a391276033e07b0c06d10d15385e7028',
+  "gobgp-completion.bash":         'c42a78ab910a2303362bb8665d36979af19076b861ebf78a17a0152d7ff16452',
+  "gobgp-dynamic-completion.bash": '7f939dde6d8c4f2fe40cb358a25f69131df99caf6beac735ffe90120dc87fdb6',
+  "gobgp-static-completion.bash":  '36e4d481b3e5a4a55d5de76cb3781390d505d8d3490d6306acf6acc956a79cb5',
 )
-url = "https://raw.githubusercontent.com/osrg/gobgp/v#{node['gobgp']['binary']['version']}/tools/completion/"
+url = "https://raw.githubusercontent.com/osrg/gobgp/v#{gobgp_version}/tools/completion/"
 dest = '/etc/bash_completion.d/'
 
-uri_hash.each do |uri, checksum|
+uri_hash.each do |uri, cs|
   remote_file uri do
     source url + uri
     path dest + uri
-    checksum checksum
+    checksum cs
   end
 end

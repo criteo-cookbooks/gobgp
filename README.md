@@ -10,8 +10,8 @@ This cookbook downloads, installs and configures GoBGP.
 * CentOS
 
 ## Attributes
-- `node['gobgp']['binary']['version']`- The version og GoBGP to download. Default `2.1.0`
-- `node['gobgp']['binary']['checksum']`- Checksum of the archive of GoBGP.
+- `node['gobgp']['version']`- The version og GoBGP to download. Default `2.30.0`
+- `node['gobgp']['checksum']`- Checksum of the archive of GoBGP.
 - `node['gobgp']['user']` - GoBGP system user name. Default `gobgpd`
 - `node['gobgp']['group']` - GoBGP system group name. Default `gobgpd`
 - `node['gobgp']['config_file']` Path of the configuration file. Default `/etc/gobgpd.conf`
